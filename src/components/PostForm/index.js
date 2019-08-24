@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './PostForm.css';
 
 export default function PostForm(props) {
+    const [values, setValues] = useState({ name: '', com: '', file: '' });
+    const handleChangeValue = name => ({ target: { value } }) => {
+        setValues({
+            ...values,
+            [name]: value,
+        });
+    };
+    const handleSubmit = event => {
+        if (event) event.preventDefault();
+        console.log('Use values', values);
+    };
+
     return (
-        <form classNameName="PostForm">
+        <form className="PostForm" onSubmit={handleSubmit}>
             <table className="postForm hideMobile" id="postForm">
                 <tbody>
                     <tr data-type="Name">
@@ -12,10 +24,12 @@ export default function PostForm(props) {
                             <input
                                 name="name"
                                 type="text"
-                                tabindex="1"
+                                tabIndex="1"
                                 placeholder="Anonymous"
+                                value={values.name}
+                                onChange={handleChangeValue('name')}
                             />
-                            <input type="submit" value="Post" tabindex="6" />
+                            <input type="submit" value="Post" tabIndex="6" />
                         </td>
                     </tr>
 
@@ -27,7 +41,9 @@ export default function PostForm(props) {
                                 cols="48"
                                 rows="4"
                                 wrap="soft"
-                                tabindex="4"
+                                tabIndex="4"
+                                value={values.com}
+                                onChange={handleChangeValue('com')}
                             />
                         </td>
                     </tr>
@@ -39,14 +55,16 @@ export default function PostForm(props) {
                                 id="postFile"
                                 name="upfile"
                                 type="file"
-                                tabindex="7"
+                                tabIndex="7"
+                                value={values.file}
+                                onChange={handleChangeValue('file')}
                             />
                         </td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="2">
+                        <td colSpan="2">
                             <div id="postFormError" />
                         </td>
                     </tr>

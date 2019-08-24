@@ -12,7 +12,7 @@ export default class App extends Component {
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <Link class="App-link" to="/">
+                    <Link className="App-link" to="/">
                         Home
                     </Link>
                 </header>
