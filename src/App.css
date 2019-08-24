@@ -1,6 +1,11 @@
+body {
+    background-image: linear-gradient(#d1d5ec, #eef2ff);
+}
+
 .App {
     text-align: center;
     padding: 16px;
+    min-height: 100vh;
 }
 
 .App-logo {
