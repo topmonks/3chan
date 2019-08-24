@@ -1,0 +1,14 @@
+.PostForm {
+    width: ;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.PostForm label {
+    display: flex;
+    flex-direction: row;
+}
+
+.PostForm label span {
+}
