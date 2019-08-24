@@ -1,18 +1,43 @@
 import React, { useState } from 'react';
 import './PostForm.css';
 
+function getBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            resolve(reader.result)
+        };
+        reader.onerror = function (error) {
+            reject(error);
+        };
+    });
+}
+
+async function getFileData(file) {
+    if (!file) return null;
+    const data = await getBase64(file);
+    return {
+        name: file.name,
+        size: file.size,
+        data,
+    }
+}
+
 export default function PostForm(props) {
-    const [values, setValues] = useState({ name: '', com: '', file: '' });
-    const handleChangeValue = name => ({ target: { value } }) => {
-        setValues({
-            ...values,
-            [name]: value,
-        });
-    };
-    const handleSubmit = event => {
+    const [name, setName] = useState("Anonymous");
+    const [comment, setComment] = useState("");
+    const [file, setFile] = useState(null);
+
+    const handleSubmit = async event => {
         if (event) event.preventDefault();
-        console.log('Use values', values);
-        this.box
+        const fileData = await getFileData(file);
+        props.submit({
+            author: name,
+            comment,
+            createdAt: new Date().toUTCString(),
+            file: fileData,
+        });
     };
 
     return (
@@ -27,8 +52,8 @@ export default function PostForm(props) {
                                 type="text"
                                 tabIndex="1"
                                 placeholder="Anonymous"
-                                value={values.name}
-                                onChange={handleChangeValue('name')}
+                                value={name}
+                                onChange={v => setName(v.target.value)}
                             />
                             <input type="submit" value="Post" tabIndex="6" />
                         </td>
@@ -43,8 +68,8 @@ export default function PostForm(props) {
                                 rows="4"
                                 wrap="soft"
                                 tabIndex="4"
-                                value={values.com}
-                                onChange={handleChangeValue('com')}
+                                value={comment}
+                                onChange={v => setComment(v.target.value)}
                             />
                         </td>
                     </tr>
@@ -57,8 +82,7 @@ export default function PostForm(props) {
                                 name="upfile"
                                 type="file"
                                 tabIndex="7"
-                                value={values.file}
-                                onChange={handleChangeValue('file')}
+                                onChange={v => setFile(v.target.files[0])}
                             />
                         </td>
                     </tr>

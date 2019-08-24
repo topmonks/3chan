@@ -1,10 +1,19 @@
 import React from 'react';
 import './JustPost.css';
+import { Link } from '@reach/router';
 import { timestampToLocalDateTime } from '../../library/format';
 import classNames from 'classnames';
 
+function bytesToSize(bytes) {
+   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+   if (bytes === 0) return '0 Byte';
+   const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+}
+
 export default function JustPost({
     isThread = false,
+    id,
     comment,
     author,
     createdAt,
@@ -23,18 +32,20 @@ export default function JustPost({
                 <span className="PostMeta_DateTime">
                     {timestampToLocalDateTime(createdAt)}
                 </span>
+                [<Link to={`/thread/${id}`}>Reply</Link>]
             </div>
             {file && (
                 <div className="JustPost__File PostFile">
                     File:{' '}
                     <span className="PostFile__Name">
                         <a
-                            href={file.url}
+                            href='#a'
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             {file.name}
                         </a>
+                        &nbsp;({bytesToSize(file.size)})
                     </span>
                     <div className="PostFile__Poster">
                         <a
@@ -43,7 +54,7 @@ export default function JustPost({
                             rel="noopener noreferrer"
                         >
                             <img
-                                src={file.poster || file.url}
+                                src={file.data}
                                 alt={file.name}
                             />
                         </a>
