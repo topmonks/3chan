@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "3box": "^1.10.7",
     "@reach/router": "^1.2.1",
     "classnames": "^2.2.6",
     "react": "^16.9.0",
