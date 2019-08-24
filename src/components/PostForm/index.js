@@ -16,7 +16,7 @@ export default function PostForm(props) {
 
     return (
         <form className="PostForm" onSubmit={handleSubmit}>
-            <table className="postForm hideMobile" id="postForm">
+            <table>
                 <tbody>
                     <tr data-type="Name">
                         <td>Name</td>
@@ -62,13 +62,6 @@ export default function PostForm(props) {
                         </td>
                     </tr>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colSpan="2">
-                            <div id="postFormError" />
-                        </td>
-                    </tr>
-                </tfoot>
             </table>
         </form>
     );

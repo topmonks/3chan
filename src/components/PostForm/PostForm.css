@@ -1,14 +1,39 @@
 .PostForm {
-    width: ;
-    justify-content: center;
+    max-width: 480px;
+    margin: 0 auto;
+    /* justify-content: center; */
     display: flex;
     flex-direction: column;
 }
 
-.PostForm label {
-    display: flex;
-    flex-direction: row;
+.PostForm input[type='text'] {
+    width: 244px;
 }
 
-.PostForm label span {
+.PostForm textarea {
+    width: 292px;
+}
+
+.PostForm input[type='text'],
+textarea {
+    margin: 0;
+    margin-right: 2px;
+    padding: 2px 4px 3px;
+    border: 1px solid #aaa;
+    outline: none;
+    font-family: arial, helvetica, sans-serif;
+    font-size: 10pt;
+}
+
+.PostForm tbody tr td:first-child {
+    background-color: #98e;
+    color: #000;
+    font-weight: 700;
+    border: 1px solid #000;
+    padding: 0 5px;
+    font-size: 10pt;
+}
+
+.PostForm table {
+    border-spacing: 1px;
 }
