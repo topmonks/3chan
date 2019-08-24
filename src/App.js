@@ -3,22 +3,22 @@ import logo from './logo.svg';
 import './App.css';
 import { Link, Router } from '@reach/router';
 import Thread from './screens/Thread';
-import Dashboard from './screens/Dashboard';
+import Board from './screens/Board';
 import NotFound from './screens/NotFound';
 
 export default class App extends Component {
     render() {
         return (
             <div className="App">
+                <Link className="App-link" to="/">
+                    Home
+                </Link>
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <Link className="App-link" to="/">
-                        Home
-                    </Link>
                 </header>
                 <main>
                     <Router>
-                        <Dashboard path="/" />
+                        <Board path="/" />
                         <Thread path="/thread/:threadId" />
                         <NotFound default />
                     </Router>

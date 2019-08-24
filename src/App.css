@@ -2,6 +2,12 @@ body {
     background-image: linear-gradient(#d1d5ec, #eef2ff);
 }
 
+hr {
+    border: none;
+    border-top: 1px solid #b7c5d9;
+    height: 0;
+}
+
 .App {
     padding: 16px;
     min-height: 100vh;
@@ -20,7 +26,7 @@ body {
     display: flex;
     /* flex-direction: row; */
     align-items: center;
-    /* justify-content: center; */
+    justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
 }
