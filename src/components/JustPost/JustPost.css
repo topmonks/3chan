@@ -1,0 +1,45 @@
+.JustPost {
+    overflow: hidden;
+    /* display: table; */
+    min-width: 335px;
+}
+
+.JustPost--thread {
+    margin: 4px 0;
+}
+.JustPost--reply {
+    background-color: #d6daf0;
+    border: 1px solid #b7c5d9;
+    border-left: none;
+    border-top: none;
+    margin: 2px;
+    margin-left: 24px;
+}
+.JustPost--reply:before {
+    content: '>>';
+    margin-left: -18px;
+    color: #b7c5d9;
+}
+
+.PostMeta {
+}
+
+.PostMeta__Author {
+    color: #117743;
+    font-weight: 700;
+    margin-right: 4px;
+}
+.PostMeta_DateTime {
+}
+
+.PostFile {
+}
+.PostFile__Poster a {
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 3px;
+    margin-bottom: 5px;
+}
+.JustPost__Comment {
+}
