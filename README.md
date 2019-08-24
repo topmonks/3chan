@@ -1,2 +1,2 @@
 # 3chan
-Decentralized 4chain clone
+Decentralized 4chan clone
