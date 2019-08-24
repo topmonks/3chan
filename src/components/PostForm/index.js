@@ -12,6 +12,7 @@ export default function PostForm(props) {
     const handleSubmit = event => {
         if (event) event.preventDefault();
         console.log('Use values', values);
+        this.box
     };
 
     return (

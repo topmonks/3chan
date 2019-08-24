@@ -37,3 +37,14 @@ hr {
 .App-link {
     margin-left: 16px;
 }
+
+.App-blinker {
+    margin-left: 20px;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
