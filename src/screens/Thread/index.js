@@ -60,6 +60,16 @@ export default function Thread(props) {
         </Fragment>
     );
 
+    const showFileDetail = props.detail === 'file';
+    if (showFileDetail) {
+        const { data } = threadData.file || {};
+        return (
+            <div className="FileDetail">
+                {props.ready ? <img src={data} alt="detail" /> : 'Loading...'}
+            </div>
+        );
+    }
+
     return (
         <div>
             <h1 className="Board-name">3chan</h1>
