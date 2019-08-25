@@ -59,6 +59,11 @@ export default class App extends Component {
                             box={this.box}
                             ready={!syncing}
                         />
+                        <Thread
+                            path="/thread/:threadId"
+                            box={this.box}
+                            ready={!syncing}
+                        />
                         <NotFound default />
                     </Router>
                 </main>
