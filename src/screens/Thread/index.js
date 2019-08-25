@@ -66,7 +66,7 @@ export default function Thread(props) {
             <hr />
             <PostForm submit={handleSubmit} />
             <hr />
-            {props.ready ? postTags() : ''}
+            {props.ready ? postTags() : 'Loading...'}
         </div>
     );
 }
