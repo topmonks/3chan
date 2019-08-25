@@ -42,8 +42,8 @@ export default function Thread(props) {
 
     const handleSubmit = async data => {
         console.log(`posting to ${props.threadId}`, data);
-        console.log(boxThread);
-        console.log(await boxThread.post(data));
+        const postId = await boxThread.post(data);
+        console.log("new post", postId);
     };
 
     const postTags = () => (
