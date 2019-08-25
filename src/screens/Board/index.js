@@ -30,6 +30,7 @@ export default function Board(props) {
             <hr />
             <PostForm submit={handleSubmit} />
             <hr />
+            {!props.ready && 'Loading...'}
             {threads.map(thread => (
                 <div key={thread.id}>
                     <JustPost isThread {...thread} />

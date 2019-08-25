@@ -55,7 +55,7 @@ export default class App extends Component {
                     <Router>
                         <Board path="/" box={this.box} ready={!syncing} />
                         <Thread
-                            path="/thread/:threadId"
+                            path="/thread/:threadId/:detail"
                             box={this.box}
                             ready={!syncing}
                         />

@@ -5,10 +5,10 @@ import { timestampToLocalDateTime } from '../../library/format';
 import classNames from 'classnames';
 
 function bytesToSize(bytes) {
-   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-   if (bytes === 0) return '0 Byte';
-   const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes === 0) return '0 Byte';
+    const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 }
 
 export default function JustPost({
@@ -34,35 +34,31 @@ export default function JustPost({
                 <span className="PostMeta_DateTime">
                     {timestampToLocalDateTime(createdAt)}
                 </span>
-                { !noreply ? [<Link key={`l-${id}`} to={`/thread/${id}`}>Reply</Link>] : "" }
-                { you ? " (you)" : ""}
+                {!noreply
+                    ? [
+                          <Link key={`l-${id}`} to={`/thread/${id}`}>
+                              Reply
+                          </Link>,
+                      ]
+                    : ''}
+                {you ? ' (you)' : ''}
             </div>
             {file && (
                 <div className="JustPost__File PostFile">
                     File:{' '}
                     <span className="PostFile__Name">
-                        <a
-                            href='#a'
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {file.name}
-                        </a>
+                        <Link to={`/thread/${id}/file`}>{file.name}</Link>
                         &nbsp;({bytesToSize(file.size)})
                     </span>
                     <div className="PostFile__Poster">
-                        <a
-                            href={file.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <Link to={`/thread/${id}/file`}>
                             <img
                                 src={file.data}
                                 alt={file.name}
                                 width="100"
                                 height="100"
                             />
-                        </a>
+                        </Link>
                     </div>
                 </div>
             )}
