@@ -24,16 +24,44 @@ export default class Data {
         this._onThreadListUpdate = callback;
     }
 
-    async getThreads() {
+    async isYou(did) {
+        const config = await Box.getConfig(this.account);
+        const dids = Object.keys(config.spaces).map(space => config.spaces[space].DID);
+        console.log("isyou", config, did, dids, dids.includes(did));
+        return dids.includes(did);
+    }
+
+    async getThreads({ includeReplies = 0 } = {}) {
         const globalThread = await this._threadsSub();
-        const threads = await globalThread.getPosts();
+        const threadsMsgs = await globalThread.getPosts();
+        if (!threadsMsgs) return [];
+
+        const threads = threadsMsgs.map(t => t.message);
+        if (includeReplies > 0) {
+            await Promise.all(threads.map(async thread => {
+                const space = await this._getGlobalSpace();
+                const t = await space.joinThreadByAddress(thread.address);
+                console.log("get add posts", thread, t);
+                const posts = await t.getPosts({ limit: includeReplies });
+                thread.replies = posts.map(p => p.message);
+                return true;
+            }));
+        }
+        console.log("loaded threads", threads);
         return threads;
     }
 
-    async getPosts(address, limit = -1) {
+    async getThreadById(id) {
+        const threads = await this.getThreads();
+        console.log("finding threads", threads);
+        const thread = threads.find(thread => thread.id === id);
+        return thread ? thread : null;
+    }
+
+    async joinThread(address, listen) {
         const space = await this._getGlobalSpace();
-        const thread = await space.joinThreadByAddress(address, { noAutoSub: true });
-        return thread.getPosts({ limit });
+        const thread = await space.joinThreadByAddress(address, { noAutoSub: !listen });
+        return thread;
     }
 
     async createThread(data) {

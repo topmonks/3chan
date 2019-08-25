@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Board.css';
 import PostForm from '../../components/PostForm';
-import Thread from '../../components/Thread';
+import JustPost from '../../components/JustPost';
 
 export default function Board(props) {
     const [threads, setThreads] = useState([]);
@@ -16,9 +16,9 @@ export default function Board(props) {
             console.log("ThreadList updated", threads);
             setThreads(threads.map(t => t.message));
         })
-        props.box.getThreads().then(threads => {
+        props.box.getThreads({ includeReplies: 3 }).then(threads => {
             console.log("ThreadList", threads);
-            setThreads(threads.map(t => t.message));
+            setThreads(threads);
         });
     }, [props.ready]);
 
@@ -32,7 +32,8 @@ export default function Board(props) {
             <hr />
             {threads.map(thread => (
                 <div key={thread.id}>
-                    <Thread box={props.box} thread={thread} />
+                    <JustPost isThread {...thread} />
+                    {thread.replies.map((post, i) => (<JustPost key={`post-${thread.id}-${i}`} {...post}/>))}
                     <hr />
                 </div>
             ))}

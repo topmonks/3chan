@@ -1,0 +1,10 @@
+.Board-name {
+    font-family: Tahoma, sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    margin-top: 0;
+    text-align: center;
+    clear: both;
+    color: #af0a0f;
+}

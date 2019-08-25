@@ -13,6 +13,8 @@ function bytesToSize(bytes) {
 
 export default function JustPost({
     isThread = false,
+    noreply = false,
+    you = false,
     id,
     comment,
     author,
@@ -32,7 +34,8 @@ export default function JustPost({
                 <span className="PostMeta_DateTime">
                     {timestampToLocalDateTime(createdAt)}
                 </span>
-                [<Link to={`/thread/${id}`}>Reply</Link>]
+                { !noreply ? [<Link key={`l-${id}`} to={`/thread/${id}`}>Reply</Link>] : "" }
+                { you ? " (you)" : ""}
             </div>
             {file && (
                 <div className="JustPost__File PostFile">
@@ -56,6 +59,8 @@ export default function JustPost({
                             <img
                                 src={file.data}
                                 alt={file.name}
+                                width="100"
+                                height="100"
                             />
                         </a>
                     </div>
