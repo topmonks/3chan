@@ -34,7 +34,7 @@ export default function Board(props) {
             {(threads || []).map(thread => (
                 <div key={thread.id}>
                     <JustPost isThread {...thread} />
-                    {thread.replies.map((post, i) => (
+                    {(thread.replies || []).map((post, i) => (
                         <JustPost
                             key={`post-${thread.id}-${i}`}
                             noreply
