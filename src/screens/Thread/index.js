@@ -62,7 +62,7 @@ export default function Thread(props) {
 
     return (
         <div>
-            <h1 className="Board-name">Board Name</h1>
+            <h1 className="Board-name">3chan</h1>
             <hr />
             <PostForm submit={handleSubmit} />
             <hr />
