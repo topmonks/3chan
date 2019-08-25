@@ -41,9 +41,9 @@ export default class App extends Component {
                 <Link className="App-link" to="/">
                     Home
                 </Link>
-                { account ? <span>Account: {account}</span> : "" }
+                {/*{ account ? <span>Account: {account}</span> : "" }*/}
                 { syncing ? <span className="App-blinker">Syncing...</span> : ""}
-                <button onClick={handleCgt}>cgt</button>
+                {/*<button onClick={handleCgt}>cgt</button>*/}
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
                 </header>
