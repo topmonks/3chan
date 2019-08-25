@@ -1,4 +1,6 @@
-PRESENTATION: [google sheets](https://docs.google.com/presentation/d/1v51Vowk8gNlFyKKHDKLpQ7G_9siL1rZkC-oTxtehk7Q/edit?usp=sharing)
+[PRESENTATION](https://docs.google.com/presentation/d/1v51Vowk8gNlFyKKHDKLpQ7G_9siL1rZkC-oTxtehk7Q/edit?usp=sharing)
+
+[DEVPOST](https://devpost.com/software/3chan)
 
 ![DOGE](https://i.imgur.com/D938evI.jpg)
 
