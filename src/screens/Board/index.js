@@ -14,7 +14,7 @@ export default function Board(props) {
         console.log('set th ready');
         props.box.onThreadListUpdate(threads => {
             console.log('ThreadList updated', threads);
-            setThreads(threads.map(t => t.message));
+            setThreads((threads || []).map(t => t.message));
         });
         props.box.getThreads({ includeReplies: 3 }).then(threads => {
             console.log('ThreadList', threads);
@@ -30,7 +30,7 @@ export default function Board(props) {
             <hr />
             <PostForm submit={handleSubmit} />
             <hr />
-            {threads.map(thread => (
+            {(threads || []).map(thread => (
                 <div key={thread.id}>
                     <JustPost isThread {...thread} />
                     {thread.replies.map((post, i) => (
