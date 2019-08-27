@@ -5,6 +5,7 @@ import JustPost from '../../components/JustPost';
 
 export default function Board(props) {
     const [threads, setThreads] = useState([]);
+    const [replies, setReplies] = useState({});
 
     useEffect(() => {
         if (!props.ready) {
@@ -16,14 +17,21 @@ export default function Board(props) {
             console.log('ThreadList updated', threads);
             setThreads((threads || []).map(t => t.message));
         });
-        props.box.getThreads({ includeReplies: 3 }).then(threads => {
-            console.log('ThreadList', threads);
-            setThreads(threads);
+        props.box.getThreads({ includeReplies: 3 }).then(([newThreads, loadingPromises]) => {
+            console.log('ThreadList', newThreads);
+            setThreads(newThreads);
+            loadingPromises.forEach(promise => {
+                promise.then(([threadId, posts]) => {
+                    setReplies({ ...replies, [threadId]: posts });
+                    console.log(`Replies for ${threadId} updated`, posts);
+                });
+            })
         });
     }, [props.ready, props.box]);
 
     const handleSubmit = data => props.box.createThread(data);
 
+    console.log({ replies });
     return (
         <div>
             <h1 className="Board-name">3chan</h1>
@@ -34,7 +42,7 @@ export default function Board(props) {
             {(threads || []).map(thread => (
                 <div key={thread.id}>
                     <JustPost isThread {...thread} />
-                    {(thread.replies || []).map((post, i) => (
+                    {(replies[thread.id] || []).map((post, i) => (
                         <JustPost
                             key={`post-${thread.id}-${i}`}
                             noreply

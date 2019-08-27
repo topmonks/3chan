@@ -31,28 +31,31 @@ export default class Data {
         return dids.includes(did);
     }
 
-    async getThreads({ includeReplies = 0 } = {}) {
+    async getThreads({ includeReplies = 0, limit = 30, reverse = true } = {}) {
         const globalThread = await this._threadsSub();
-        const threadsMsgs = await globalThread.getPosts();
+        const threadsMsgs = await globalThread.getPosts({ limit, reverse });
         if (!threadsMsgs) return [];
 
         const threads = threadsMsgs.map(t => t.message);
+        const loadingPromises = [];
         if (includeReplies > 0) {
-            await Promise.all(threads.map(async thread => {
-                const space = await this._getGlobalSpace();
-                const t = await space.joinThreadByAddress(thread.address);
-                console.log("get add posts", thread, t);
-                const posts = await t.getPosts({ limit: includeReplies });
-                thread.replies = posts.map(p => p.message);
-                return true;
-            }));
+            threads.forEach(thread => {
+                const fn = async thread => {
+                    const space = await this._getGlobalSpace();
+                    const t = await space.joinThreadByAddress(thread.address);
+                    console.log("get add posts", thread, t);
+                    const posts = await t.getPosts({ limit: includeReplies });
+                    return [thread.id, posts.map(p => p.message)];
+                };
+                loadingPromises.push(fn(thread));
+            });
         }
         console.log("loaded threads", threads);
-        return threads;
+        return [threads, loadingPromises];
     }
 
     async getThreadById(id) {
-        const threads = await this.getThreads();
+        const [threads] = await this.getThreads({ limit: 0, reverse: false });
         console.log("finding threads", threads);
         const thread = threads.find(thread => thread.id === id);
         return thread ? thread : null;

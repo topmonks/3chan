@@ -36,10 +36,10 @@ export default class App extends Component {
     }
 
     render() {
-        const { syncing, account } = this.state;
-        const handleCgt = this.box
-            ? () => this.box.createGlobalThread()
-            : () => {};
+        const { syncing } = this.state;
+        // const handleCgt = this.box
+        //     ? () => this.box.createGlobalThread()
+        //     : () => {};
         return (
             <div className="App">
                 <Link className="App-link" to="/">
